@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: catalogdb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - catalog-app_network
+    command: bash -c "
+          /entrypoint.sh mysqld & sleep 30 &&
+          mysql -u root -p${MYSQL_ROOT_PASSWORD} -e \"CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+          GRANT ALL PRIVILEGES ON catalogdb.* TO '${MYSQL_USER}'@'%';
+          FLUSH PRIVILEGES;\"
+          && wait"
+  
+  redis:
+    image: redis
+    container_name: catalogredis
+    ports:
+      - "6389:6379"
+
+networks:
+  catalog-app_network:
+    driver: bridge
