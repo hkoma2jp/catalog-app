@@ -1,0 +1,73 @@
+Table categories {
+  id          varchar    [pk]                     // 商品マスタからの一意のID
+  name        varchar    [not null]               // 商品マスタからのカテゴリ名
+  display_name varchar   // ページ表示用の名前
+  left_bound  int        [not null]               // 左インデックス
+  right_bound int        [not null]               // 右インデックス
+  parent_id   varchar                            // 親カテゴリID
+  created_at  datetime   [not null]               // 登録日
+  updated_at  datetime   [not null]               // 最終更新日
+  deleted_at  datetime                            // 削除日時 (物理削除)
+}
+
+Table products {
+  id          varchar    [pk]                     // 商品マスタからの一意のID
+  name        varchar    [not null]               // 商品マスタからの商品名
+  display_name varchar   // ページ表示用の名前
+  description text                                 // 商品の説明
+  category_id varchar                              // カテゴリID (外部キー)
+  created_at  datetime   [not null]               // 登録日
+  updated_at  datetime   [not null]               // 最終更新日
+  deleted_at  datetime                            // 削除日時 (物理削除)
+}
+
+Table skus {
+  id          varchar    [pk]                     // 商品マスタからの一意のID
+  name        varchar    [not null]               // 商品マスタからのSKU名
+  display_name varchar   // ページ表示用の名前
+  product_id  varchar                              // 商品ID (外部キー)
+  sku_code    varchar    [not null]                // SKUコード
+  list_price  decimal                              // 定価
+  price       decimal                              // 価格
+  created_at  datetime   [not null]               // 登録日
+  updated_at  datetime   [not null]               // 最終更新日
+  deleted_at  datetime                            // 削除日時 (物理削除)
+}
+
+Table specs {
+  id          varchar    [pk]                     // 商品マスタからの一意のID
+  sku_id      varchar                              // SKU ID (外部キー)
+  spec_name   varchar    [not null]                // スペック名
+  spec_value  varchar    [not null]                // スペックの値
+  created_at  datetime   [not null]               // 登録日
+  updated_at  datetime   [not null]               // 最終更新日
+  deleted_at  datetime                            // 削除日時 (物理削除)
+}
+
+Table locations {
+  id          varchar    [pk]                     // ロケーションID
+  name        varchar    [not null]                // ロケーション名
+  address     varchar                              // 住所
+  type        enum('store', 'warehouse')           // ロケーションのタイプ
+  created_at  datetime   [not null]               // 登録日
+  updated_at  datetime   [not null]               // 最終更新日
+  deleted_at  datetime                            // 削除日時 (論理削除)
+}
+
+Table stocks {
+  id                  varchar    [pk]             // 在庫ID
+  sku_id              varchar                        // SKU ID (外部キー)
+  location_id         varchar                        // ロケーションID (外部キー)
+  quantity            int                            // 在庫数
+  pickup_available    boolean                        // 店舗受取可否
+  delivery_available  boolean                        // 直送可否
+  created_at          datetime   [not null]          // 登録日
+  updated_at          datetime   [not null]          // 最終更新日
+  deleted_at          datetime                        // 削除日時 (論理削除)
+}
+
+Ref: products.category_id > categories.id
+Ref: skus.product_id > products.id
+Ref: specs.sku_id > skus.id
+Ref: stocks.sku_id > skus.id
+Ref: stocks.location_id > locations.id
