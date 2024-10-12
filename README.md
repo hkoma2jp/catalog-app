@@ -34,9 +34,9 @@ $ cd api/ && ./mvnw spring-boot:run
 - Browse  
     - Index  
     http://localhost:8082/
-    - All Products Endpoint
+    - All Products Endpoint  
     http://localhost:8082/api/v1/products
-    - Product by id Endpoint
+    - Product by id Endpoint  
     http://localhost:8082/api/v1/products/10001
 
 ## Schema
