@@ -26,6 +26,13 @@ Wait a few minutes...
 
 ### 2.API
 
+- Run
+```bash
+$ cd api/ && ./mvnw spring-boot:run
+```
+
+- Browse  
+http://localhost:8082/
 
 
 ## Schema
@@ -33,7 +40,6 @@ Wait a few minutes...
 - Database(Port MySQL: 3308 / Redis: 6389)
 ![db_schema](docs/assets/db_schema.png)
 
-- OAS３.0
-
-http://localhost:8082/swagger-ui/index.html
+- OAS３.0  
+  http://localhost:8082/swagger-ui/index.html
 

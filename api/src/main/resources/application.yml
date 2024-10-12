@@ -1,0 +1,27 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3308/catalogdb
+        username: devuser
+        password: dev
+    sql:
+        init:
+            mode: always
+            encoding: utf-8
+    servlet:
+        multipart:
+            max-file-size: 60MB
+            max-request-size: 60MB
+server:
+    port: 8082
+    
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: debug
+                type: 
+                    descriptor:
+                        sql:
+                            BasicBinder: trace
+                    EnumType: trace
+                            
