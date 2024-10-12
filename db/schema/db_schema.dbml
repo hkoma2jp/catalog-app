@@ -35,10 +35,11 @@ Table skus {
 }
 
 Table specs {
-  id          varchar    [pk]                     // 商品マスタからの一意のID
+  id          varchar    [pk]                     // SKU ID と ソートキー(ゼロ埋め整数2桁)の結合
   sku_id      varchar                              // SKU ID (外部キー)
   spec_name   varchar    [not null]                // スペック名
   spec_value  varchar    [not null]                // スペックの値
+  sort_order  int    [not null]               // 同一SKU内のソートキー
   created_at  datetime   [not null]               // 登録日
   updated_at  datetime   [not null]               // 最終更新日
   deleted_at  datetime                            // 削除日時 (物理削除)
