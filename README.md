@@ -28,7 +28,7 @@ docker compose up -d
 
 Wait a few minutes...
 
-### 2.API
+### 2.REST API
 
 - Run
 
@@ -44,10 +44,26 @@ cd api/ && ./mvnw spring-boot:run
   - Product by id Endpoint  
     <http://localhost:8082/api/v1/products/10001>
 
+### 2.GraphQL API
+
+- Run
+
+```bash
+cd graphql/ && .mvnw spring-boot:run
+```
+
+- Browse
+  - GraphQL Endpoint (graphiql)
+  <http://localhost:8083/graphiql>
+
 ## Schema
 
-- Database(Port MySQL: 3308 / Redis: 6389)
+- Database(Port MySQL: 3308 / Redis: 6389)  
+  db/schema/db_schema.dbml
 ![db_schema](docs/assets/db_schema.png)
 
 - OAS３.0  
   <http://localhost:8082/swagger-ui/index.html>
+
+- GraphQL Schema  
+  graphql/src/main/resources/graphql/schema.graphqls
