@@ -6,13 +6,13 @@
 
 ### 1.Database
 
-#### a) add .env file
+- add .env file
 
 ```bash
 touch ./.env
 ```
 
-./.env
+ ./.env
 
 ```dotenv
 MYSQL_ROOT_PASSWORD=XXXX
@@ -20,7 +20,7 @@ MYSQL_USER=XXXX
 MYSQL_PASSWORD=XXXX
 ```
 
-#### b) docker compose up
+- docker compose up
 
 ```bash
 docker compose up -d
@@ -44,7 +44,7 @@ cd api/ && ./mvnw spring-boot:run
   - Product by id Endpoint  
     <http://localhost:8082/api/v1/products/10001>
 
-### 2.GraphQL API
+### 3.GraphQL API
 
 - Run
 
@@ -53,7 +53,7 @@ cd graphql/ && .mvnw spring-boot:run
 ```
 
 - Browse
-  - GraphQL Endpoint (graphiql)
+  - GraphQL Endpoint (graphiql)  
   <http://localhost:8083/graphiql>
 
 ## Schema
